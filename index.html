@@ -4,126 +4,143 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DreamWave</title>
-  <!-- Y2K Aesthetic Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!-- XP Font (Verdana as fallback) -->
   <style>
     /* Reset & Base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      background: linear-gradient(135deg, #020024, #090979, #00d4ff);
-      font-family: 'Press Start 2P', monospace;
-      color: #fff;
-      overflow-x: hidden;
+    body {
+      /* Windows XP Bliss wallpaper */
+      background: url('https://upload.wikimedia.org/wikipedia/commons/5/53/Windows_XP_Blossom.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Verdana, Geneva, sans-serif;
+      color: #000;
+      padding-top: 40px; /* space for top bar */
     }
     a { text-decoration: none; color: inherit; }
 
-    /* Container */
-    .container { max-width: 960px; margin: 0 auto; padding: 2rem; position: relative; }
+    /* Top App Bar (XP-style) */
+    .taskbar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 40px;
+      background: #0C4DA2;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+    .taskbar .logo {
+      background: #C0C0C0;
+      padding: 4px 10px;
+      border: 1px solid #fff;
+      box-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #000;
+      margin-right: 20px;
+      cursor: default;
+    }
+    .taskbar ul {
+      display: flex;
+      list-style: none;
+    }
+    .taskbar ul li {
+      margin-right: 8px;
+    }
+    .taskbar ul li a {
+      display: inline-block;
+      background: #C0C0C0;
+      padding: 4px 10px;
+      border: 1px solid #fff;
+      box-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+      font-size: 0.75rem;
+      color: #000;
+      line-height: 1;
+    }
+    .taskbar ul li a:hover {
+      background: #E0E0E0;
+    }
 
-    /* Navigation */
-    nav { display: flex; justify-content: space-between; align-items: center; }
-    nav .logo { font-size: 1.2rem; letter-spacing: 2px; }
-    nav ul { display: flex; list-style: none; gap: 1.5rem; }
-    nav ul li { font-size: 0.7rem; }
-    nav ul li:hover { text-shadow: 0 0 8px #00ffff; }
+    /* Container for content */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid #fff;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
 
-    /* Glitch Hero */
-    header { text-align: center; margin: 4rem 0; position: relative; }
-    .glitch {
-      position: relative;
-      font-size: 3rem;
-      letter-spacing: 2px;
+    /* Section Styles */
+    header, section { margin-bottom: 2rem; }
+    header h1 {
+      font-size: 2rem;
+      color: #0C4DA2;
     }
-    .glitch::before, .glitch::after {
-      content: attr(data-text);
-      position: absolute; top: 0; left: 0;
-      width: 100%;
+    header p {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
     }
-    .glitch::before {
-      text-shadow: -2px 0 cyan;
-      clip: rect(0,900px,0,0);
-      animation: glitchTop 2s infinite linear alternate-reverse;
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #0C4DA2;
+      border-bottom: 2px solid #0C4DA2;
+      display: inline-block;
     }
-    .glitch::after {
-      text-shadow: -2px 0 magenta;
-      clip: rect(0,900px,0,0);
-      animation: glitchBottom 2s infinite linear alternate-reverse;
-    }
-    @keyframes glitchTop {
-      0%,60%,100%{clip:rect(0,900px,0,0);} 10%,30%{clip:rect(10px,900px,50px,0);} 20%,40%{clip:rect(85px,900px,140px,0);}
-    }
-    @keyframes glitchBottom {
-      0%,60%,100%{clip:rect(0,900px,0,0);} 10%,30%{clip:rect(85px,900px,140px,0);} 20%,40%{clip:rect(10px,900px,50px,0);}
-    }
-    .tagline { margin-top: 1rem; font-size: 0.8rem; color: #00ffff; text-shadow: 1px 1px 2px #000; }
-
-    /* Sections */
-    section { margin: 4rem 0; }
-    h2 { font-size: 2rem; text-align: center; margin-bottom: 2rem; }
-
-    /* Services */
-    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
+    .services, .portfolio { display: flex; gap: 1rem; flex-wrap: wrap; }
     .card {
-      background: rgba(0,0,0,0.3);
-      border: 2px solid #00ffff;
-      padding: 1.5rem;
-      text-align: center;
+      background: #FFF;
+      border: 1px solid #0C4DA2;
+      padding: 1rem;
+      width: calc(33% - 1rem);
+      min-width: 200px;
     }
-    .card h3 { font-size: 1rem; margin-bottom: 1rem; }
-    .card p { font-size: 0.7rem; line-height: 1.4; }
-
-    /* Portfolio */
-    .portfolio { display: flex; gap: 1rem; overflow-x: auto; }
+    .card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+    .card p { font-size: 0.8rem; }
     .portfolio img {
-      width: 200px;
-      height: 120px;
-      object-fit: cover;
-      border: 2px dotted #ff00ff;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #0C4DA2;
     }
-
-    /* Contact */
-    .contact form { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+    .contact form { display: flex; flex-direction: column; gap: 1rem; }
     input, textarea {
-      width: 100%; max-width: 400px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid #00ffff;
       padding: 0.5rem;
-      font-family: inherit;
-      color: #fff;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
+      border: 1px solid #0C4DA2;
     }
     button {
-      padding: 0.7rem 1.5rem;
+      width: fit-content;
+      padding: 0.5rem 1rem;
       font-size: 0.8rem;
-      border: 2px solid #00ffff;
-      background: transparent;
+      background: #0C4DA2;
+      color: #fff;
+      border: none;
       cursor: pointer;
-      animation: flicker 3s infinite;
     }
-    @keyframes flicker { 0%,19%,21%,23%,25%,54%,56%,100%{opacity:1;} 20%,24%,55%{opacity:0.4;} }
-
-    /* VHS Static Overlay */
-    .static { pointer-events: none; position: fixed; top:0; left:0; width:100%; height:100%; background: url('https://i.imgur.com/Iy88YVw.png') repeat; opacity:0.08; animation: noise 0.2s infinite; }
-    @keyframes noise { 0%,100%{transform:translate(0);}10%{transform:translate(-5%,-5%);}20%{transform:translate(-10%,5%);}30%{transform:translate(5%,-10%);}40%{transform:translate(-5%,15%);}50%{transform:translate(-10%,5%);}60%{transform:translate(15%,0);}70%{transform:translate(0,10%);}80%{transform:translate(-15%,0);}90%{transform:translate(10%,5%);} }
+    button:hover {
+      background: #084A8C;
+    }
   </style>
 </head>
 <body>
-  <div class="static"></div>
-  <div class="container">
-    <nav>
-      <div class="logo">DreamWave</div>
-      <ul>
-        <li><a href="#home">HOME</a></li>
-        <li><a href="#services">SERVICES</a></li>
-        <li><a href="#portfolio">PORTFOLIO</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-      </ul>
-    </nav>
+  <!-- XP-style Top Bar -->
+  <div class="taskbar">
+    <div class="logo">DreamWave</div>
+    <ul>
+      <li><a href="#home">Start</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
 
+  <div class="container">
     <!-- Hero -->
     <header id="home">
-      <h1 class="glitch" data-text="DreamWave">DreamWave</h1>
-      <p class="tagline">Ride the Retro-Tech Wave</p>
+      <h1>Welcome to DreamWave</h1>
+      <p>Ride the Retro-Tech Wave</p>
     </header>
 
     <!-- Services -->
@@ -132,15 +149,15 @@
       <div class="services">
         <div class="card">
           <h3>Social Media Management</h3>
-          <p>From content calendars to engagement growth—let us handle your socials.</p>
+          <p>Let us handle your content calendars, posting, and engagement.</p>
         </div>
         <div class="card">
           <h3>Photography Shoots</h3>
-          <p>High-res brand shoots, product photography, and lifestyle imagery.</p>
+          <p>High-res brand, product, and lifestyle photos.</p>
         </div>
         <div class="card">
           <h3>Video Editing</h3>
-          <p>Cinematic ads, reels, and promos optimized for every platform.</p>
+          <p>Cinematic ads and promos optimized for every platform.</p>
         </div>
       </div>
     </section>
@@ -149,10 +166,9 @@
     <section id="portfolio">
       <h2>Recent Work</h2>
       <div class="portfolio">
-        <img src="https://via.placeholder.com/200x120" alt="Project 1">
-        <img src="https://via.placeholder.com/200x120" alt="Project 2">
-        <img src="https://via.placeholder.com/200x120" alt="Project 3">
-        <img src="https://via.placeholder.com/200x120" alt="Project 4">
+        <img src="https://via.placeholder.com/300x200" alt="Project 1">
+        <img src="https://via.placeholder.com/300x200" alt="Project 2">
+        <img src="https://via.placeholder.com/300x200" alt="Project 3">
       </div>
     </section>
 
@@ -164,19 +180,10 @@
           <input type="text" name="name" placeholder="Your Name" required>
           <input type="email" name="email" placeholder="Your Email" required>
           <textarea name="message" rows="4" placeholder="Your Message"></textarea>
-          <button type="submit">SEND</button>
+          <button type="submit">Send</button>
         </form>
       </div>
     </section>
   </div>
-
-  <script>
-    // Subtle header flicker
-    const glitch = document.querySelector('.glitch');
-    setInterval(() => {
-      glitch.style.opacity = Math.random() * 0.2 + 0.85;
-      setTimeout(() => glitch.style.opacity = 1, 100);
-    }, 2500);
-  </script>
 </body>
 </html>
