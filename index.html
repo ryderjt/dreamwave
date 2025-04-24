@@ -1,1 +1,88 @@
-<h1>Hello world</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DreamWave</title>
+  <!-- Y2K-inspired font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top left, #00ffff, #000000);
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Glitchy Heading */
+    h1 {
+      font-size: 3rem;
+      position: relative;
+      color: #00ffff;
+      animation: glitch 2s infinite;
+    }
+    @keyframes glitch {
+      0% { text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff; }
+      20% { text-shadow: -2px 2px #ff00ff, 2px -2px #00ffff; }
+      40% { text-shadow: 2px -2px #ff00ff, -2px 2px #00ffff; }
+      60% { text-shadow: -2px -2px #ff00ff, 2px 2px #00ffff; }
+      80% { text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff; }
+      100% { text-shadow: -2px 2px #ff00ff, 2px -2px #00ffff; }
+    }
+
+    /* Tagline */
+    p {
+      margin: 1rem 0;
+      font-size: 1rem;
+      text-align: center;
+      text-shadow: 1px 1px #000000;
+    }
+
+    /* Neon Buttons */
+    .btn {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid #00ffff;
+      text-decoration: none;
+      color: #00ffff;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,255,255,0.2);
+      transition: left 0.5s ease;
+    }
+    .btn:hover {
+      background: rgba(0,255,255,0.1);
+    }
+    .btn:hover::before {
+      left: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>DreamWave</h1>
+  <p>Surf the neon dream &mdash; Social media, photography, and video for the future-retro era.</p>
+  <div>
+    <a href="#services" class="btn">Our Services</a>
+    <a href="#portfolio" class="btn">Portfolio</a>
+    <a href="#contact" class="btn">Contact Us</a>
+  </div>
+</body>
+</html>
