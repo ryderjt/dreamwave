@@ -1,53 +1,133 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DreamWave</title>
-  <!-- Y2K-inspired font -->
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="main.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DreamWave</n  
+  <!-- Y2K Aesthetic Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #020024, #090979, #00d4ff);
+      font-family: 'Press Start 2P', monospace;
+      color: #fff;
+      overflow: hidden;
+    }
+    .container {
+      text-align: center;
+      position: relative;
+    }
+
+    /* Glitchy Header */
+    .glitch {
+      position: relative;
+      font-size: 3rem;
+      letter-spacing: 2px;
+    }
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 cyan;
+      clip: rect(0, 900px, 0, 0);
+      animation: glitchTop 2s infinite linear alternate-reverse;
+    }
+    .glitch::after {
+      left: -2px;
+      text-shadow: -2px 0 magenta;
+      clip: rect(0, 900px, 0, 0);
+      animation: glitchBottom 2s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitchTop {
+      0%, 60%, 100% { clip: rect(0, 900px, 0, 0); }
+      10%, 30% { clip: rect(10px, 900px, 50px, 0); }
+      20%, 40% { clip: rect(85px, 900px, 140px, 0); }
+    }
+    @keyframes glitchBottom {
+      0%, 60%, 100% { clip: rect(0, 900px, 0, 0); }
+      10%, 30% { clip: rect(85px, 900px, 140px, 0); }
+      20%, 40% { clip: rect(10px, 900px, 50px, 0); }
+    }
+
+    /* Tagline */
+    .tagline {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: #00ffff;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    /* Neon Button */
+    .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      font-size: 0.8rem;
+      color: #00ffff;
+      border: 2px solid #00ffff;
+      position: relative;
+      animation: flicker 3s infinite;
+    }
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.4; }
+    }
+
+    /* VHS Static Overlay */
+    .static {
+      pointer-events: none;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://i.imgur.com/Iy88YVw.png') repeat;
+      opacity: 0.1;
+      animation: noise 0.2s infinite;
+    }
+    @keyframes noise {
+      0%, 100% { transform: translate(0, 0); }
+      10% { transform: translate(-5%, -5%); }
+      20% { transform: translate(-10%, 5%); }
+      30% { transform: translate(5%, -10%); }
+      40% { transform: translate(-5%, 15%); }
+      50% { transform: translate(-10%, 5%); }
+      60% { transform: translate(15%, 0); }
+      70% { transform: translate(0, 10%); }
+      80% { transform: translate(-15%, 0); }
+      90% { transform: translate(10%, 5%); }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="#services">SERVICES</a>
-      <a href="#portfolio">PORTFOLIO</a>
-      <a href="#contact">CONTACT</a>
-    </nav>
-  </header>
-  <main>
-    <section class="hero" id="hero">
-      <h1>DreamWave</h1>
-      <p>Surf the neon dream — social media, photography, and video for the future-retro era.</p>
-      <div class="btn-group">
-        <a href="#services" class="btn">Our Services</a>
-        <a href="#portfolio" class="btn">Portfolio</a>
-        <a href="#contact" class="btn">Contact Us</a>
-      </div>
-    </section>
-    <section id="services">
-      <h2>OUR SERVICES</h2>
-      <ul class="services-list">
-        <li>Social Media Management</li>
-        <li>Photoshoots & Editing</li>
-        <li>Ad Video Production</li>
-        <li>Branding & Design</li>
-      </ul>
-    </section>
-    <section id="portfolio">
-      <h2>PORTFOLIO</h2>
-      <p>Check out our latest work—coming soon!</p>
-    </section>
-    <section id="contact">
-      <h2>CONTACT US</h2>
-      <p>Email: <a href="mailto:hello@dreamwave.com">hello@dreamwave.com</a></p>
-    </section>
-  </main>
-  <footer>
-    &copy; 2025 DreamWave. All Rights Reserved.
-  </footer>
+  <div class="container">
+    <h1 class="glitch" data-text="DreamWave">DreamWave</h1>
+    <p class="tagline">Ride the Retro-Tech Wave</p>
+    <a href="#services" class="btn">Our Services</a>
+  </div>
+  <div class="static"></div>
+
+  <!-- Optional JS for extra flicker effect -->
+  <script>
+    // Random flicker on header
+    const glitch = document.querySelector('.glitch');
+    setInterval(() => {
+      glitch.style.opacity = Math.random() * 0.2 + 0.9;
+      setTimeout(() => glitch.style.opacity = 1, 100);
+    }, 2000);
+  </script>
 </body>
 </html>
